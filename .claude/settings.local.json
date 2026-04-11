@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open http://localhost:3000)",
+      "Bash(npm run:*)",
+      "Bash(pkill -f \"node dist/server.js\")",
+      "Bash(node dist/server.js)"
+    ]
+  }
+}
