@@ -10,6 +10,10 @@ app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+app.get('/standard', (_req, res) => {
+  res.send('Coming soon.');
+});
+
 app.listen(PORT, () => {
   console.log(`Portfolio running at http://localhost:${PORT}`);
 });

@@ -295,8 +295,15 @@ html, body {
 .splash-main {
   display: flex;
   flex-direction: column;
-  gap: 2%;
-  margin-bottom: 8%;
+  gap: 1%;
+  margin-bottom: 6%;
+}
+
+.splash-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 1%;
 }
 
 .splash-avatar {
@@ -309,7 +316,7 @@ html, body {
 }
 
 .splash-name {
-  font-size: clamp(22px, 4.2vw, 52px);
+  font-size: clamp(18px, 3vw, 38px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -317,10 +324,18 @@ html, body {
 }
 
 .splash-role {
-  font-size: clamp(9px, 1.2vw, 15px);
+  font-size: clamp(8px, 1vw, 13px);
   color: rgba(60,50,40,0.45);
   letter-spacing: 0.06em;
   font-weight: 400;
+}
+
+.splash-arrow {
+  width: clamp(16px, 1.8vw, 22px);
+  height: clamp(16px, 1.8vw, 22px);
+  color: rgba(242,237,230,0.5);
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .splash-bottom {
@@ -332,20 +347,47 @@ html, body {
 
 .splash-cta {
   width: 100%;
-  padding: 4.5% 0;
+  padding: 4% 5%;
   background: #1A1610;
-  border: 1px solid transparent;
-  border-radius: 50px;
+  border: none;
+  border-radius: 16px;
   color: #F2EDE6;
-  font-size: clamp(10px, 1.3vw, 16px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
   cursor: pointer;
-  transition: background 0.2s ease, opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 0.2s ease;
+  text-align: left;
 }
 
-.splash-cta:hover {
-  opacity: 0.82;
+.splash-cta:hover { opacity: 0.82; }
+
+.splash-play-icon {
+  width: clamp(20px, 2.4vw, 32px);
+  height: clamp(20px, 2.4vw, 32px);
+  flex-shrink: 0;
+  color: #F2EDE6;
+}
+
+.splash-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.splash-now-playing {
+  font-size: clamp(7px, 0.8vw, 10px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242,237,230,0.45);
+}
+
+.splash-cta-track {
+  font-size: clamp(10px, 1.2vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #F2EDE6;
 }
 
 .splash-skip {
@@ -359,6 +401,62 @@ html, body {
 .splash-skip:hover {
   color: rgba(60,50,40,0.60);
 }
+
+/* ── WAVEFORM ───────────────────────────────────────────────── */
+.splash-waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: clamp(20px, 2.4vw, 32px);
+  width: 60%;
+  margin: 2% auto;
+}
+
+.splash-waveform span {
+  display: block;
+  width: clamp(2px, 0.3vw, 4px);
+  border-radius: 99px;
+  background: rgba(30,24,16,0.25);
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.splash-waveform span:nth-child(1)  { height: 30%; animation-delay: 0.0s; }
+.splash-waveform span:nth-child(2)  { height: 60%; animation-delay: 0.1s; }
+.splash-waveform span:nth-child(3)  { height: 90%; animation-delay: 0.2s; }
+.splash-waveform span:nth-child(4)  { height: 55%; animation-delay: 0.3s; }
+.splash-waveform span:nth-child(5)  { height: 80%; animation-delay: 0.15s; }
+.splash-waveform span:nth-child(6)  { height: 40%; animation-delay: 0.4s; }
+.splash-waveform span:nth-child(7)  { height: 100%; animation-delay: 0.05s; }
+.splash-waveform span:nth-child(8)  { height: 65%; animation-delay: 0.25s; }
+.splash-waveform span:nth-child(9)  { height: 45%; animation-delay: 0.35s; }
+.splash-waveform span:nth-child(10) { height: 85%; animation-delay: 0.1s; }
+.splash-waveform span:nth-child(11) { height: 55%; animation-delay: 0.45s; }
+.splash-waveform span:nth-child(12) { height: 75%; animation-delay: 0.2s; }
+.splash-waveform span:nth-child(13) { height: 35%; animation-delay: 0.3s; }
+.splash-waveform span:nth-child(14) { height: 95%; animation-delay: 0.0s; }
+.splash-waveform span:nth-child(15) { height: 50%; animation-delay: 0.4s; }
+.splash-waveform span:nth-child(16) { height: 70%; animation-delay: 0.15s; }
+.splash-waveform span:nth-child(17) { height: 40%; animation-delay: 0.25s; }
+.splash-waveform span:nth-child(18) { height: 88%; animation-delay: 0.05s; }
+.splash-waveform span:nth-child(19) { height: 60%; animation-delay: 0.35s; }
+.splash-waveform span:nth-child(20) { height: 30%; animation-delay: 0.45s; }
+.splash-waveform span:nth-child(21) { height: 75%; animation-delay: 0.1s; }
+.splash-waveform span:nth-child(22) { height: 50%; animation-delay: 0.2s; }
+.splash-waveform span:nth-child(23) { height: 90%; animation-delay: 0.3s; }
+.splash-waveform span:nth-child(24) { height: 45%; animation-delay: 0.0s; }
+.splash-waveform span:nth-child(25) { height: 65%; animation-delay: 0.4s; }
+.splash-waveform span:nth-child(26) { height: 35%; animation-delay: 0.15s; }
+.splash-waveform span:nth-child(27) { height: 80%; animation-delay: 0.25s; }
+.splash-waveform span:nth-child(28) { height: 55%; animation-delay: 0.05s; }
+.splash-waveform span:nth-child(29) { height: 70%; animation-delay: 0.35s; }
+.splash-waveform span:nth-child(30) { height: 40%; animation-delay: 0.45s; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1);   }
+  50%       { transform: scaleY(0.2); }
+}
+
 
 .splash-socials {
   display: flex;
