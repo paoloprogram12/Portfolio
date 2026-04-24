@@ -23,6 +23,12 @@
           <feGaussianBlur stdDeviation="14" result="blur"/>
           <feComposite in="SourceGraphic" in2="blur" operator="over"/>
         </filter>
+        <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="22"/>
+        </filter>
+        <filter id="coneBlur" x="-30%" y="-10%" width="160%" height="130%">
+          <feGaussianBlur stdDeviation="12"/>
+        </filter>
         <filter id="rainBlur" x="-5%" y="-5%" width="110%" height="110%">
           <feGaussianBlur stdDeviation="0.35 0"/>
         </filter>
@@ -41,6 +47,15 @@
           <stop offset="40%"  stop-color="#C8D8FF"  stop-opacity="0.85"/>
           <stop offset="100%" stop-color="#4060B0"  stop-opacity="0"/>
         </radialGradient>
+
+        <!-- Drum shade cylindrical body gradient -->
+        <linearGradient id="shadeBody" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stop-color="#080810" stop-opacity="1"/>
+          <stop offset="18%"  stop-color="#1C1E2E" stop-opacity="1"/>
+          <stop offset="48%"  stop-color="#2E3248" stop-opacity="1"/>
+          <stop offset="78%"  stop-color="#1A1C2A" stop-opacity="1"/>
+          <stop offset="100%" stop-color="#0A0A14" stop-opacity="1"/>
+        </linearGradient>
 
         <!-- Floor lamp floor pool — cool -->
         <radialGradient id="lampFloor" cx="50%" cy="50%" r="50%">
@@ -262,41 +277,46 @@
       <!-- Wall–floor shadow -->
       <rect y="710" width="1440" height="34" fill="#000" opacity="0.52"/>
 
-      <!-- Lamp floor pool -->
-      <ellipse cx="155" cy="787" rx="270" ry="68" fill="url(#lampFloor)" opacity="0.90"/>
-      <ellipse cx="155" cy="792" rx="140" ry="38" fill="#FFB030" opacity="0.05"/>
+      <!-- Lamp floor pool — soft blurred glow on floor -->
+      <ellipse cx="228" cy="760" rx="220" ry="55" fill="#8AA8D8" opacity="0.18" filter="url(#softGlow)"/>
+      <ellipse cx="228" cy="748" rx="100" ry="28" fill="#B0C8F0" opacity="0.12" filter="url(#softGlow)"/>
 
-      <!-- ── FLOOR LAMP ──────────────────────────────────────────── -->
-      <!-- Soft bloom behind shade -->
-      <ellipse cx="148" cy="270" rx="150" ry="110" fill="#6080FF" opacity="0.04" filter="url(#lampBloom)"/>
-      <!-- Base shadow -->
-      <ellipse cx="148" cy="743" rx="28" ry="7" fill="#000" opacity="0.48"/>
-      <!-- Base -->
-      <ellipse cx="148" cy="738" rx="23" ry="5.5" fill="#14141A"/>
-      <ellipse cx="148" cy="738" rx="15" ry="3.5" fill="#1E1E28" opacity="0.9"/>
-      <!-- Pole -->
-      <rect x="144" y="230" width="8" height="508" fill="#16161E" rx="2"/>
-      <rect x="145.5" y="230" width="2" height="508" fill="#24243A" opacity="0.5" rx="1"/>
-      <rect x="150"   y="230" width="1.5" height="508" fill="#000" opacity="0.28" rx="0.5"/>
-      <!-- Shade — symmetric truncated cone, centered on pole -->
-      <!-- Outer layer (darkest) -->
-      <path d="M 136 220 L 90 305 Q 148 324 206 305 L 160 220 Q 148 214 136 220 Z" fill="#1A1C28"/>
-      <!-- Mid layer -->
-      <path d="M 136 220 L 93 302 Q 148 320 203 302 L 160 220 Q 148 214 136 220 Z" fill="#2A2E42"/>
-      <!-- Lit inner face -->
-      <path d="M 136 220 L 97 298 Q 148 315 199 298 L 160 220 Q 148 214 136 220 Z" fill="#404868"/>
-      <!-- Inner glow -->
-      <path d="M 139 223 L 102 294 Q 148 308 194 294 L 157 223 Q 148 218 139 223 Z" fill="url(#lampGlow)" opacity="0.78"/>
+      <!-- ── FLOOR LAMP (Modern Arc) ─────────────────────────────── -->
+      <!-- Downward light cone — blurred, natural falloff -->
+      <path d="M 194 286 L 100 520 Q 228 560 356 520 L 264 286 Q 228 300 194 286 Z" fill="#8AAAE0" opacity="0.10" filter="url(#coneBlur)"/>
+
+      <!-- Base — sits on floor -->
+      <rect x="22" y="738" width="108" height="10" rx="2" fill="#20202A"/>
+      <rect x="22" y="738" width="108" height="2"  rx="1" fill="#30303E"/>
+      <rect x="28" y="740" width="96"  height="8"  rx="1" fill="#18181F"/>
+
+      <!-- Pole — extends to base -->
+      <rect x="73" y="148" width="6" height="592" rx="1" fill="#1A1A24"/>
+      <rect x="74" y="148" width="2" height="592" rx="1" fill="#2E2E42" opacity="0.65"/>
+
+      <!-- Arc arm -->
+      <path d="M 76 150 C 76 68 252 68 232 218" stroke="#1A1A24" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M 76 150 C 76 68 252 68 232 218" stroke="#2C2C40" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.65"/>
+
+      <!-- Drum shade — realistic cylinder -->
       <!-- Top cap -->
-      <ellipse cx="148" cy="220" rx="12" ry="3.5" fill="#10101A"/>
-      <ellipse cx="148" cy="219" rx="8"  ry="2"   fill="#1C1C2A" opacity="0.9"/>
-      <!-- Bottom rim glow -->
-      <ellipse cx="148" cy="305" rx="58" ry="11" fill="#D8E8FF" opacity="0.55"/>
-      <ellipse cx="148" cy="306" rx="44" ry="7"  fill="#B0C8F8" opacity="0.35"/>
-      <!-- Downward light cone -->
-      <path d="M 90 305 L 36 450 Q 148 478 260 450 L 206 305 Q 148 324 90 305 Z" fill="#A0C0FF" opacity="0.04"/>
-      <!-- Upward glow toward ceiling -->
-      <ellipse cx="148" cy="228" rx="90" ry="36" fill="#8099CC" opacity="0.08"/>
+      <ellipse cx="228" cy="220" rx="36" ry="7" fill="#0C0C16"/>
+      <ellipse cx="228" cy="220" rx="34" ry="6" fill="#14141E"/>
+      <!-- Cylinder body -->
+      <rect x="192" y="220" width="72" height="68" fill="url(#shadeBody)"/>
+      <line x1="192" y1="220" x2="192" y2="288" stroke="#050508" stroke-width="1"/>
+      <line x1="264" y1="220" x2="264" y2="288" stroke="#050508" stroke-width="1"/>
+      <!-- Inner glow bleeding through fabric -->
+      <rect x="196" y="224" width="64" height="60" fill="url(#lampGlow)" opacity="0.52"/>
+      <!-- Socket fitting -->
+      <ellipse cx="228" cy="220" rx="10" ry="3.5" fill="#0A0A12"/>
+      <ellipse cx="228" cy="220" rx="7"  ry="2.5" fill="#1E1E2C"/>
+      <!-- Bottom rim — layered glow, softest outer to brightest inner -->
+      <ellipse cx="228" cy="289" rx="52" ry="12" fill="#6080C0" opacity="0.30" filter="url(#softGlow)"/>
+      <ellipse cx="228" cy="288" rx="36" ry="7"  fill="#B8D0FF" opacity="0.80"/>
+      <ellipse cx="228" cy="288" rx="28" ry="5"  fill="#D8E8FF" opacity="0.68"/>
+      <ellipse cx="228" cy="288" rx="20" ry="3"  fill="#F0F6FF" opacity="0.90"/>
+
 
       <!-- ── VIGNETTE ────────────────────────────────────────────── -->
       <rect width="1440" height="900" fill="url(#vignette)"/>
