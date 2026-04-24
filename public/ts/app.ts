@@ -3,64 +3,46 @@
 // ============================================================
 
 class LandingScene {
-  private phone: HTMLElement;
-
   constructor() {
-    this.phone = document.getElementById('phone')!;
-
     this.initPhoneInteraction();
     this.initDynamicIsland();
+    this.initStatusBar();
   }
 
   // ── PHONE TAP ───────────────────────────────────────────────
-  private initPhoneInteraction(): void {
-    const screen = this.phone.querySelector('.phone-screen') as HTMLElement;
-    screen?.addEventListener('click', (e: MouseEvent) => {
-      this.createRipple(screen, e);
-    });
-  }
-
-  private createRipple(container: HTMLElement, e: MouseEvent): void {
-    const rect   = container.getBoundingClientRect();
-    const x      = e.clientX - rect.left;
-    const y      = e.clientY - rect.top;
-    const ripple = document.createElement('div');
-
-    Object.assign(ripple.style, {
-      position:      'absolute',
-      left:          `${x - 30}px`,
-      top:           `${y - 30}px`,
-      width:         '60px',
-      height:        '60px',
-      borderRadius:  '50%',
-      background:    'rgba(255,255,255,0.18)',
-      transform:     'scale(0)',
-      pointerEvents: 'none',
-      zIndex:        '20',
-      transition:    'transform 0.55s ease, opacity 0.55s ease',
-    });
-
-    container.appendChild(ripple);
-    requestAnimationFrame(() => {
-      ripple.style.transform = 'scale(8)';
-      ripple.style.opacity   = '0';
-    });
-    setTimeout(() => ripple.remove(), 600);
-  }
+  private initPhoneInteraction(): void {}
 
   // ── DYNAMIC ISLAND ──────────────────────────────────────────
   private initDynamicIsland(): void {
     const island = document.querySelector<HTMLElement>('.dynamic-island');
     if (!island) return;
+  }
 
-    island.addEventListener('mouseenter', () => {
-      island.style.width  = '60%';
-      island.style.height = '5%';
-    });
-    island.addEventListener('mouseleave', () => {
-      island.style.width  = '27%';
-      island.style.height = '3.4%';
-    });
+  // ── STATUS BAR ──────────────────────────────────────────────
+  private initStatusBar(): void {
+    const timeEl = document.querySelector<HTMLElement>('.status-time');
+    const batteryEl = document.querySelector<HTMLElement>('.status-battery-pct');
+
+    const updateTime = () => {
+      if (!timeEl) return;
+      const now  = new Date();
+      const h    = now.getHours();
+      const m    = now.getMinutes().toString().padStart(2, '0');
+      timeEl.textContent = `${h}:${m}`;
+    };
+
+    updateTime();
+    setInterval(updateTime, 10000);
+
+    if (batteryEl && 'getBattery' in navigator) {
+      (navigator as any).getBattery().then((battery: any) => {
+        const update = () => {
+          batteryEl.textContent = `${Math.round(battery.level * 100)}%`;
+        };
+        update();
+        battery.addEventListener('levelchange', update);
+      });
+    }
   }
 }
 
