@@ -468,11 +468,11 @@ html, body {
 .player-list {
   flex: 1;
   min-height: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
   overscroll-behavior: contain;
-  padding: 4% 4% 6%;
+  padding: 1% 4% 6%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4% 3%;
@@ -587,13 +587,18 @@ html, body {
   height: clamp(20px, 2.4vw, 30px);
 }
 
+.pv-fixed {
+  flex-shrink: 0;
+  padding: 1% 5% 0%;
+}
+
 .pv-scroll {
   flex: 1;
   min-height: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  padding: 3% 5% 8%;
+  padding: 0% 5% 35%;
   scrollbar-width: thin;
   scrollbar-color: rgba(30,24,16,0.18) transparent;
 }
@@ -603,13 +608,13 @@ html, body {
 .pv-scroll::-webkit-scrollbar-thumb { background: rgba(30,24,16,0.18); border-radius: 99px; }
 
 .pv-cover {
-  width: 65%;
+  width: 72%;
   aspect-ratio: 1;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 5%;
+  margin: 0 auto 4%;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 

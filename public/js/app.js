@@ -7,7 +7,6 @@
       this.initDynamicIsland();
       this.initStatusBar();
       this.initViewTransitions();
-      this.initScrollIsolation();
     }
     // ── PHONE TAP ───────────────────────────────────────────────
     initPhoneInteraction() {}
@@ -50,23 +49,6 @@
 
       eduBack?.addEventListener("click", () => {
         hideView(eduView);
-      });
-    }
-    // ── SCROLL ISOLATION ────────────────────────────────────────
-    initScrollIsolation() {
-      const scrollEls = document.querySelectorAll('.player-list, .pv-scroll');
-      scrollEls.forEach(el => {
-        el.addEventListener('wheel', (e) => {
-          const atTop = el.scrollTop === 0;
-          const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-          if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
-            e.preventDefault();
-          }
-          e.stopPropagation();
-        }, { passive: false });
-
-        el.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
-        el.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
       });
     }
     // ── STATUS BAR ──────────────────────────────────────────────
