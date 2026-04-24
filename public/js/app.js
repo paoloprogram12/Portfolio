@@ -6,6 +6,7 @@
       this.initPhoneInteraction();
       this.initDynamicIsland();
       this.initStatusBar();
+      this.initViewTransitions();
     }
     // ── PHONE TAP ───────────────────────────────────────────────
     initPhoneInteraction() {}
@@ -13,6 +14,28 @@
     initDynamicIsland() {
       const island = document.querySelector(".dynamic-island");
       if (!island) return;
+    }
+    // ── VIEW TRANSITIONS ────────────────────────────────────────
+    initViewTransitions() {
+      const splash     = document.querySelector(".splash");
+      const player     = document.getElementById("playerView");
+      const ctaBtn     = document.querySelector(".splash-cta");
+      const backBtn    = document.getElementById("playerBack");
+
+      ctaBtn?.addEventListener("click", () => {
+        splash.style.transition = "opacity 0.25s ease";
+        splash.style.opacity = "0";
+        splash.style.pointerEvents = "none";
+        setTimeout(() => { player.classList.add("active"); }, 200);
+      });
+
+      backBtn?.addEventListener("click", () => {
+        player.classList.remove("active");
+        setTimeout(() => {
+          splash.style.opacity = "1";
+          splash.style.pointerEvents = "all";
+        }, 250);
+      });
     }
     // ── STATUS BAR ──────────────────────────────────────────────
     initStatusBar() {
